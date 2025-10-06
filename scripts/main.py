@@ -11,26 +11,56 @@ import os
 import random
 import glob
 
+# class Solution:
+#     def __init__(self):
+#         self.tasks = []
+#         self.solution_preparation_time_min = 0
+#         self.solution_total_value = 0
+
+#     def add_task(self, task):
+#         self.tasks.append(task)
+#         self.solution_preparation_time_min += task.time_to_prepare_min
+#         self.solution_total_value += task.value
+
+#     def __str__(self):
+#         solution_time_cumulative = 0
+#         solution_value_cumulative = 0
+#         return_string = f"Solution (with {len(self.tasks)} tasks) \n"
+#         for task in self.tasks:
+#             solution_value_cumulative += task.value
+#             solution_time_cumulative += task.time_to_prepare_min
+#             return_string += f"  Task {task.id}, value {task.value}, prep_time {task.time_to_prepare_min}  (cumulative value {solution_value_cumulative}, time {solution_time_cumulative})\n"
+
+#         return return_string
+
 
 class Solution:
-    def __init__(self):
-        self.tasks = []
+    def __init__(self, task_count):
+        self.tasks = [0] * task_count
         self.solution_preparation_time_min = 0
         self.solution_total_value = 0
 
-    def append_task(self, task):
-        self.tasks.append(task)
+    def add_task(self, task):
+        self.tasks[task.id] = 1
         self.solution_preparation_time_min += task.time_to_prepare_min
         self.solution_total_value += task.value
 
+    def remove_task(self, task):
+        self.tasks[task.id] = 0
+        self.solution_preparation_time_min -= task.time_to_prepare_min
+        self.solution_total_value -= task.value
+
+    def get_chosen_task_indices(self):
+        return [index for index, bit in enumerate(self.tasks) if bit != 0]
+
+    def get_non_chosen_task_indices(self):
+        return [index for index, bit in enumerate(self.tasks) if bit != 1]
+
     def __str__(self):
-        solution_time_cumulative = 0
-        solution_value_cumulative = 0
-        return_string = "Solution:\n"
-        for task in self.tasks:
-            solution_value_cumulative += task.value
-            solution_time_cumulative += task.time_to_prepare_min
-            return_string += f"  Task {task.id}, value {task.value}, prep_time {task.time_to_prepare_min}  (cumulative value {solution_value_cumulative}, time {solution_time_cumulative})\n"
+        return_string = f"Solution \n"
+        return_string = f"  With {len(self.tasks)} tasks, solution_value {self.solution_total_value} , solution_time {self.solution_preparation_time_min} \n"
+        return_string += f"  Whole tasks list: {self.tasks}\n"
+        return_string += f"  Included task_id's: {self.get_chosen_task_indices()}\n"
 
         return return_string
 
@@ -126,15 +156,17 @@ class OptimizeStudyingTime:
         task_info = tasks_json["task_info"]
         for idx, info in task_info.items():
             self.tasks.append(
-                Task(idx, info["task_value"], info["time_to_prepare_min"])
+                Task(
+                    int(idx), int(info["task_value"]), int(info["time_to_prepare_min"])
+                )
             )
 
-    def debug_find_global_optimum(self):
+    def _debug_estimate_global_optimum(self):
         # in this task it is actually posible to find global optimum (or something very close to it) by using task relative value (value / time_taken)
         tasks_sorted_by_relative_value = sorted(
             self.tasks, key=lambda task: task.debug_relative_value, reverse=True
         )
-        self.debug_global_optimum_solution = Solution()
+        self.debug_global_optimum_solution = Solution(self.test_task_count)
 
         for task in tasks_sorted_by_relative_value:
             if (
@@ -142,53 +174,153 @@ class OptimizeStudyingTime:
                 + task.time_to_prepare_min
                 <= self.time_left_to_prepare_min
             ):
-                self.debug_global_optimum_solution.append_task(task)
+                self.debug_global_optimum_solution.add_task(task)
             else:
                 continue
 
-    def initialize_solution_1(self):
+    def _initialize_solution_1(self):
         # Take first (changing number of) solutions, until they reach time_left_to_prepare_min
-        self.initial_solution = Solution()
+        self.the_solution = Solution(self.test_task_count)
 
         for task in self.tasks:
-            if (
-                self.initial_solution.solution_preparation_time_min
-                + task.time_to_prepare_min
-                <= self.time_left_to_prepare_min
-            ):
-                self.initial_solution.append_task(task)
+            if self._get_time_difference() >= task.time_to_prepare_min:
+                self.the_solution.add_task(task)
             else:
                 continue
 
+    def _get_time_difference(self):
+        return (
+            self.time_left_to_prepare_min
+            - self.the_solution.solution_preparation_time_min
+        )
+
+    # NOTE: nav pārliecības, ka šai abstrakcijai ir jebkāda jēga -->
+    # def remove_task_from_solution(self, idx):
+    #     self.the_solution.remove_task(self.tasks[idx])
+
+    # def swap_tasks_in_solution(self, remove_idx, add_idx):
+    #     self.the_solution.add_task(self.tasks[add_idx])
+    #     self.the_solution.remove_task(self.tasks[remove_idx])
+
+
+class SimmulatedAnnealing:
+    def __init__(self, optimizer):
+        self.optimizer = optimizer
+        self.steps_taken = 0
+
+    def potential_cost(self, indices_add=[], indices_remove=[]):
+        solution_time = self.optimizer.the_solution.solution_preparation_time_min
+        solution_value = self.optimizer.the_solution.solution_total_value
+
+        for idx in indices_add:
+            solution_value += self.optimizer.tasks[idx].value
+            solution_time += self.optimizer.tasks[idx].time_to_prepare_min
+
+        for idx in indices_remove:
+            solution_value -= self.optimizer.tasks[idx].value
+            solution_time -= self.optimizer.tasks[idx].time_to_prepare_min
+
+        # new - old
+        # positive value_change = good  , positive time_change => might exceed total :(
+        solution_time_change = (
+            solution_time - self.optimizer.the_solution.solution_preparation_time_min
+        )
+        solution_value_change = (
+            solution_value - self.optimizer.the_solution.solution_total_value
+        )
+
+        return solution_value_change, solution_time_change
+
     # TODO
-    # implement algorithm to optimize something :)
-    # Simulated Annealing
-    # Tabu Search
-    # Late Acceptance Hill-Climbing
-    # Evolutionary algorithms
-    # -
-    # Iterated greedy
-    # Variable Neighbourhood
-    # Greedy Randomized Adaptive Search Procedure
-    # Path Relinking
+    # 1 jāimplementē tieši SA algoritms
+    # 2 time ir hard constraint, to pārsniegt nedrīkst. Bet risināšanas laikā droši vien drīkst :|
+    #    value -> cenšamies palielināt
 
-    # man ir jādabū augstākais iespējamais value / score, atrodoties zem laika ierobežojuma
+    def step_with_one_of_neighbours(self):
+        if (
+            self.optimizer._get_time_difference()
+            < -self.optimizer.time_left_to_prepare_min * 0.1
+        ):
+            # if solution total time exceeds given maximum time by more than 10% of total time => focus more on removing tasks
+            neighbourhood_function = random.choices(
+                ["remove_1", "1_in_1_out", "1_in_2_out"],
+                [0.4, 0.2, 0.4],
+            )
+        else:
+            # otherwise choose between several options
+            neighbourhood_function = random.choices(
+                ["add_1", "remove_1", "1_in_1_out", "2_in_1_out", "1_in_2_out"],
+                [0.2, 0.2, 0.2, 0.2, 0.2],
+            )
 
-    def algo(self):
-        pass
+        non_chosen_idx = self.optimizer.the_solution.get_non_chosen_task_indices()
+        chosen_idx = self.optimizer.the_solution.get_chosen_task_indices()
+
+        # TODO pēc SA algoritma jāsaprot, vai pieņemt šo versiju, vai nepieņemt
+        add_idx = []
+        remove_idx = []
+        if neighbourhood_function == "add_1":
+            add_idx = [random.choice(non_chosen_idx)]
+        elif neighbourhood_function == "remove_1":
+            remove_idx = [random.choice(chosen_idx)]
+        elif neighbourhood_function == "1_in_1_out":
+            add_idx = [random.choice(non_chosen_idx)]
+            remove_idx = [random.choice(chosen_idx)]
+        elif neighbourhood_function == "2_in_1_out":
+            add_idx = random.choices(non_chosen_idx, k=2)
+            remove_idx = [random.choice(chosen_idx)]
+        elif neighbourhood_function == "1_in_2_out":
+            add_idx = [random.choice(non_chosen_idx)]
+            remove_idx = random.choices(chosen_idx, k=2)
+
+        value_added, time_added = self.potential_cost(
+            indices_add=add_idx, indices_remove=remove_idx
+        )
+        is_solution_legal = (
+            True if self.optimizer._get_time_difference() >= 0 else False
+        )
+
+        # TODO - accept / reject?
+        # if - else
+        # else:
+        # value_added, time_added = 0, 0
+
+        chosen_idx = self.optimizer.the_solution.get_chosen_task_indices()
+        print(
+            f" {self.steps_taken} step, is_legal {is_solution_legal}, added value {value_added}, time {time_added}, total value {self.optimizer.the_solution.solution_total_value}, time {self.optimizer.the_solution.solution_preparation_time_min},  task_idx in: {chosen_idx}"
+        )
+
+        return value_added, time_added, is_solution_legal
 
 
-# optimizer = OptimizeStudyingTime()
-# # optimizer.generate_data()
-# optimizer.set_task_json()
-# optimizer.initialize_tasks()
+optimizer = OptimizeStudyingTime()
+# optimizer.generate_data()
+optimizer.set_task_json()
+optimizer.initialize_tasks()
 
-# optimizer.debug_find_global_optimum()
-# optimizer.initialize_solution_1()
+optimizer._debug_estimate_global_optimum()
+optimizer._initialize_solution_1()
 
-# print(f"time_left_to_prepare_min {optimizer.time_left_to_prepare_min}")
-# print("Global optimum")
-# print(optimizer.debug_global_optimum_solution)
-# print("-------------------")
-# print("Initial")
-# print(optimizer.initial_solution)
+algorithm = SimmulatedAnnealing(optimizer)
+
+print(f"time_left_to_prepare_min {optimizer.time_left_to_prepare_min}")
+print("Global optimum")
+print(optimizer.debug_global_optimum_solution)
+print("-------------------")
+print("Initial")
+print(optimizer.the_solution)
+
+
+# TODO 1
+# implement algorithm to optimize something :)
+# Simulated Annealing
+# Tabu Search
+# Late Acceptance Hill-Climbing
+# Evolutionary algorithms
+# -
+# Iterated greedy
+# Variable Neighbourhood
+# Greedy Randomized Adaptive Search Procedure
+# Path Relinking
+
+# man ir jādabū augstākais iespējamais value / score, atrodoties zem laika ierobežojuma
