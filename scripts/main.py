@@ -75,7 +75,6 @@ class OptimizeStudyingTime:
 
     def generate_data(
         self,
-        # NOTE: careful about changing values, if time_to_test_min > sum(task[i] * random(time_range_min)), optimization does not make sense
         n_test_tasks=50,
         value_range=(1, 10),
         time_range_min=(10, 60),
@@ -347,9 +346,13 @@ class SimmulatedAnnealing:
 if __name__ == "__main__":
     generate_data = False
 
+    # initializes optimizer
     optimizer = OptimizeStudyingTime()
 
+    # generate data regime or run regime
     if generate_data:
+        # NOTE: careful about changing values, if time_to_test_min > sum(task[i] * random(time_range_min)), optimization does not make sense
+        # does not overwrite files in data directory - adds new with increased number
         optimizer.generate_data(
             n_test_tasks=100,
             value_range=(1, 10),
@@ -357,10 +360,15 @@ if __name__ == "__main__":
             time_to_test_min=60 * 6,
         )
     else:
+        # set which file to use, if unset uses task_0.json
         optimizer.set_task_json(task_json_name="task_0.json")
+
+        # put tasks from JSON in class and optimizer
         optimizer.initialize_tasks()
 
+        # greedy heurestics to get optimum solution (or close to that); does not interfere with rest of code
         optimizer._debug_estimate_global_optimum()
+        # initialize actual solution
         optimizer._initialize_solution_1()
 
         print(f"0 time_left_to_prepare_min: {optimizer.time_left_to_prepare_min}")
@@ -370,7 +378,6 @@ if __name__ == "__main__":
         print(optimizer.the_solution)
         print("------------------------------------------------------------")
 
-        some = time.time()
         sim_ann = SimmulatedAnnealing(optimizer)
         sim_ann.run(start_temp=1000)
 
