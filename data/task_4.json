@@ -1,0 +1,418 @@
+{
+    "general_info": {
+        "test_task_count": 100,
+        "task_value_range": [
+            1,
+            10
+        ],
+        "task_preparation_time_range_min": [
+            10,
+            40
+        ],
+        "time_left_to_prepare_min": 360,
+        "total_task_preparation_time_min": 2498,
+        "total_task_value": 533
+    },
+    "task_info": {
+        "0": {
+            "task_value": 5,
+            "time_to_prepare_min": 22
+        },
+        "1": {
+            "task_value": 3,
+            "time_to_prepare_min": 33
+        },
+        "2": {
+            "task_value": 4,
+            "time_to_prepare_min": 12
+        },
+        "3": {
+            "task_value": 8,
+            "time_to_prepare_min": 18
+        },
+        "4": {
+            "task_value": 8,
+            "time_to_prepare_min": 28
+        },
+        "5": {
+            "task_value": 9,
+            "time_to_prepare_min": 11
+        },
+        "6": {
+            "task_value": 8,
+            "time_to_prepare_min": 10
+        },
+        "7": {
+            "task_value": 6,
+            "time_to_prepare_min": 40
+        },
+        "8": {
+            "task_value": 8,
+            "time_to_prepare_min": 22
+        },
+        "9": {
+            "task_value": 2,
+            "time_to_prepare_min": 28
+        },
+        "10": {
+            "task_value": 5,
+            "time_to_prepare_min": 40
+        },
+        "11": {
+            "task_value": 6,
+            "time_to_prepare_min": 25
+        },
+        "12": {
+            "task_value": 3,
+            "time_to_prepare_min": 12
+        },
+        "13": {
+            "task_value": 1,
+            "time_to_prepare_min": 31
+        },
+        "14": {
+            "task_value": 4,
+            "time_to_prepare_min": 34
+        },
+        "15": {
+            "task_value": 5,
+            "time_to_prepare_min": 38
+        },
+        "16": {
+            "task_value": 7,
+            "time_to_prepare_min": 37
+        },
+        "17": {
+            "task_value": 5,
+            "time_to_prepare_min": 34
+        },
+        "18": {
+            "task_value": 5,
+            "time_to_prepare_min": 25
+        },
+        "19": {
+            "task_value": 1,
+            "time_to_prepare_min": 12
+        },
+        "20": {
+            "task_value": 6,
+            "time_to_prepare_min": 26
+        },
+        "21": {
+            "task_value": 3,
+            "time_to_prepare_min": 24
+        },
+        "22": {
+            "task_value": 9,
+            "time_to_prepare_min": 35
+        },
+        "23": {
+            "task_value": 2,
+            "time_to_prepare_min": 12
+        },
+        "24": {
+            "task_value": 2,
+            "time_to_prepare_min": 35
+        },
+        "25": {
+            "task_value": 7,
+            "time_to_prepare_min": 11
+        },
+        "26": {
+            "task_value": 10,
+            "time_to_prepare_min": 29
+        },
+        "27": {
+            "task_value": 6,
+            "time_to_prepare_min": 32
+        },
+        "28": {
+            "task_value": 8,
+            "time_to_prepare_min": 40
+        },
+        "29": {
+            "task_value": 8,
+            "time_to_prepare_min": 11
+        },
+        "30": {
+            "task_value": 9,
+            "time_to_prepare_min": 29
+        },
+        "31": {
+            "task_value": 3,
+            "time_to_prepare_min": 20
+        },
+        "32": {
+            "task_value": 6,
+            "time_to_prepare_min": 38
+        },
+        "33": {
+            "task_value": 2,
+            "time_to_prepare_min": 28
+        },
+        "34": {
+            "task_value": 2,
+            "time_to_prepare_min": 29
+        },
+        "35": {
+            "task_value": 9,
+            "time_to_prepare_min": 35
+        },
+        "36": {
+            "task_value": 2,
+            "time_to_prepare_min": 37
+        },
+        "37": {
+            "task_value": 2,
+            "time_to_prepare_min": 27
+        },
+        "38": {
+            "task_value": 8,
+            "time_to_prepare_min": 14
+        },
+        "39": {
+            "task_value": 1,
+            "time_to_prepare_min": 25
+        },
+        "40": {
+            "task_value": 1,
+            "time_to_prepare_min": 31
+        },
+        "41": {
+            "task_value": 8,
+            "time_to_prepare_min": 14
+        },
+        "42": {
+            "task_value": 6,
+            "time_to_prepare_min": 14
+        },
+        "43": {
+            "task_value": 3,
+            "time_to_prepare_min": 17
+        },
+        "44": {
+            "task_value": 10,
+            "time_to_prepare_min": 10
+        },
+        "45": {
+            "task_value": 6,
+            "time_to_prepare_min": 39
+        },
+        "46": {
+            "task_value": 3,
+            "time_to_prepare_min": 13
+        },
+        "47": {
+            "task_value": 5,
+            "time_to_prepare_min": 18
+        },
+        "48": {
+            "task_value": 1,
+            "time_to_prepare_min": 17
+        },
+        "49": {
+            "task_value": 6,
+            "time_to_prepare_min": 38
+        },
+        "50": {
+            "task_value": 2,
+            "time_to_prepare_min": 31
+        },
+        "51": {
+            "task_value": 1,
+            "time_to_prepare_min": 13
+        },
+        "52": {
+            "task_value": 7,
+            "time_to_prepare_min": 34
+        },
+        "53": {
+            "task_value": 1,
+            "time_to_prepare_min": 34
+        },
+        "54": {
+            "task_value": 3,
+            "time_to_prepare_min": 19
+        },
+        "55": {
+            "task_value": 7,
+            "time_to_prepare_min": 25
+        },
+        "56": {
+            "task_value": 9,
+            "time_to_prepare_min": 13
+        },
+        "57": {
+            "task_value": 8,
+            "time_to_prepare_min": 15
+        },
+        "58": {
+            "task_value": 9,
+            "time_to_prepare_min": 20
+        },
+        "59": {
+            "task_value": 3,
+            "time_to_prepare_min": 22
+        },
+        "60": {
+            "task_value": 5,
+            "time_to_prepare_min": 39
+        },
+        "61": {
+            "task_value": 9,
+            "time_to_prepare_min": 27
+        },
+        "62": {
+            "task_value": 10,
+            "time_to_prepare_min": 28
+        },
+        "63": {
+            "task_value": 9,
+            "time_to_prepare_min": 25
+        },
+        "64": {
+            "task_value": 7,
+            "time_to_prepare_min": 14
+        },
+        "65": {
+            "task_value": 6,
+            "time_to_prepare_min": 25
+        },
+        "66": {
+            "task_value": 4,
+            "time_to_prepare_min": 36
+        },
+        "67": {
+            "task_value": 8,
+            "time_to_prepare_min": 32
+        },
+        "68": {
+            "task_value": 2,
+            "time_to_prepare_min": 39
+        },
+        "69": {
+            "task_value": 10,
+            "time_to_prepare_min": 28
+        },
+        "70": {
+            "task_value": 3,
+            "time_to_prepare_min": 27
+        },
+        "71": {
+            "task_value": 4,
+            "time_to_prepare_min": 18
+        },
+        "72": {
+            "task_value": 1,
+            "time_to_prepare_min": 20
+        },
+        "73": {
+            "task_value": 2,
+            "time_to_prepare_min": 11
+        },
+        "74": {
+            "task_value": 3,
+            "time_to_prepare_min": 28
+        },
+        "75": {
+            "task_value": 7,
+            "time_to_prepare_min": 30
+        },
+        "76": {
+            "task_value": 2,
+            "time_to_prepare_min": 31
+        },
+        "77": {
+            "task_value": 2,
+            "time_to_prepare_min": 26
+        },
+        "78": {
+            "task_value": 9,
+            "time_to_prepare_min": 39
+        },
+        "79": {
+            "task_value": 5,
+            "time_to_prepare_min": 19
+        },
+        "80": {
+            "task_value": 5,
+            "time_to_prepare_min": 15
+        },
+        "81": {
+            "task_value": 4,
+            "time_to_prepare_min": 39
+        },
+        "82": {
+            "task_value": 5,
+            "time_to_prepare_min": 17
+        },
+        "83": {
+            "task_value": 1,
+            "time_to_prepare_min": 19
+        },
+        "84": {
+            "task_value": 6,
+            "time_to_prepare_min": 35
+        },
+        "85": {
+            "task_value": 7,
+            "time_to_prepare_min": 20
+        },
+        "86": {
+            "task_value": 10,
+            "time_to_prepare_min": 16
+        },
+        "87": {
+            "task_value": 1,
+            "time_to_prepare_min": 27
+        },
+        "88": {
+            "task_value": 9,
+            "time_to_prepare_min": 39
+        },
+        "89": {
+            "task_value": 2,
+            "time_to_prepare_min": 37
+        },
+        "90": {
+            "task_value": 5,
+            "time_to_prepare_min": 19
+        },
+        "91": {
+            "task_value": 5,
+            "time_to_prepare_min": 17
+        },
+        "92": {
+            "task_value": 9,
+            "time_to_prepare_min": 18
+        },
+        "93": {
+            "task_value": 4,
+            "time_to_prepare_min": 19
+        },
+        "94": {
+            "task_value": 8,
+            "time_to_prepare_min": 24
+        },
+        "95": {
+            "task_value": 8,
+            "time_to_prepare_min": 36
+        },
+        "96": {
+            "task_value": 7,
+            "time_to_prepare_min": 11
+        },
+        "97": {
+            "task_value": 9,
+            "time_to_prepare_min": 25
+        },
+        "98": {
+            "task_value": 4,
+            "time_to_prepare_min": 17
+        },
+        "99": {
+            "task_value": 9,
+            "time_to_prepare_min": 20
+        }
+    }
+}

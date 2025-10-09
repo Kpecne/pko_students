@@ -1,0 +1,98 @@
+{
+    "general_info": {
+        "test_task_count": 20,
+        "task_value_range": [
+            1,
+            10
+        ],
+        "task_preparation_time_range_min": [
+            1,
+            20
+        ],
+        "time_left_to_prepare_min": 60,
+        "total_task_preparation_time_min": 254,
+        "total_task_value": 104
+    },
+    "task_info": {
+        "0": {
+            "task_value": 4,
+            "time_to_prepare_min": 11
+        },
+        "1": {
+            "task_value": 9,
+            "time_to_prepare_min": 9
+        },
+        "2": {
+            "task_value": 10,
+            "time_to_prepare_min": 15
+        },
+        "3": {
+            "task_value": 10,
+            "time_to_prepare_min": 10
+        },
+        "4": {
+            "task_value": 3,
+            "time_to_prepare_min": 20
+        },
+        "5": {
+            "task_value": 4,
+            "time_to_prepare_min": 14
+        },
+        "6": {
+            "task_value": 3,
+            "time_to_prepare_min": 19
+        },
+        "7": {
+            "task_value": 8,
+            "time_to_prepare_min": 13
+        },
+        "8": {
+            "task_value": 9,
+            "time_to_prepare_min": 17
+        },
+        "9": {
+            "task_value": 8,
+            "time_to_prepare_min": 3
+        },
+        "10": {
+            "task_value": 1,
+            "time_to_prepare_min": 7
+        },
+        "11": {
+            "task_value": 3,
+            "time_to_prepare_min": 13
+        },
+        "12": {
+            "task_value": 1,
+            "time_to_prepare_min": 11
+        },
+        "13": {
+            "task_value": 8,
+            "time_to_prepare_min": 5
+        },
+        "14": {
+            "task_value": 4,
+            "time_to_prepare_min": 9
+        },
+        "15": {
+            "task_value": 3,
+            "time_to_prepare_min": 14
+        },
+        "16": {
+            "task_value": 2,
+            "time_to_prepare_min": 19
+        },
+        "17": {
+            "task_value": 7,
+            "time_to_prepare_min": 15
+        },
+        "18": {
+            "task_value": 5,
+            "time_to_prepare_min": 17
+        },
+        "19": {
+            "task_value": 2,
+            "time_to_prepare_min": 13
+        }
+    }
+}
